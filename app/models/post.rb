@@ -2,7 +2,7 @@ class Post
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  attr_accessor :blog, :title, :body
+  attr_accessor :blog, :title, :body, :pubdate
 
   def initialize(attrs = {})
     attrs.each do |k, v|
@@ -10,7 +10,8 @@ class Post
     end
   end
 
-  def publish
+  def publish(clock = DateTime)
+    self.pubdate = clock.now
     blog.add_entry(self)
   end
 
