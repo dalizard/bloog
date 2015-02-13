@@ -5,7 +5,7 @@ class Post
 
   validates :title, presence: true
 
-  attr_accessor :blog, :title, :body, :pubdate
+  attr_accessor :blog, :title, :body, :pubdate, :image_url
 
   def initialize(attrs = {})
     attrs.each do |k, v|
@@ -21,5 +21,9 @@ class Post
 
   def persisted?
     false
+  end
+
+  def picture?
+    image_url.present?
   end
 end
