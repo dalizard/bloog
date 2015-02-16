@@ -5,6 +5,10 @@ class Blog
     @entry_fetcher = entry_fetcher
   end
 
+  def self.model_name
+    ActiveModel::Name.new(self)
+  end
+
   def entries
     fetch_entries.sort_by(&:pubdate).reverse.take(10)
   end

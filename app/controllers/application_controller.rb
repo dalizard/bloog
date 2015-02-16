@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   helper :exhibits
 
+  def blog_url(*)
+    root_url
+  end
+
   private
 
   def init_blog
