@@ -1,11 +1,11 @@
 require 'minitest/autorun'
-require 'active_model'
 require_relative '../spec_helper_lite'
 require_relative '../../app/models/post'
 
 describe Post do
   before do
     @it = Post.new
+    @ar = @it
   end
 
   it "starts with blank attributes" do
@@ -27,12 +27,6 @@ describe Post do
     blog = Object.new
     @it.blog = blog
     @it.blog.must_equal blog
-  end
-
-  it "supports setting attributes in the initializer" do
-    it = Post.new(title: 'my title', body: 'my body')
-    it.title.must_equal 'my title'
-    it.body.must_equal 'my body'
   end
 
   it "is not valid with a blank title" do
@@ -67,7 +61,9 @@ describe Post do
     end
 
     describe "given an invalid post" do
-      before { @it.title = nil }
+      before do
+        stub(@ar).valid? { false }
+      end
 
       it "wont add the post to the blog" do
         dont_allow(@blog).add_entry
