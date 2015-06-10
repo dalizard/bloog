@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216122525) do
+ActiveRecord::Schema.define(version: 20150216205417) do
 
   create_table "posts", force: :cascade do |t|
     t.datetime "pubdate"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150216122525) do
     t.string   "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tags"
   end
 
 end

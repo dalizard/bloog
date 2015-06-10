@@ -1,4 +1,17 @@
 class Blog
+  class FilteredBlog < DelegateClass(Blog)
+    include ::Conversions
+
+    def initialize(blog, tag)
+      super(blog)
+      @tag = tag
+    end
+
+    def entries
+      Taggable(super).tagged(@tag)
+    end
+  end
+
   attr_writer :post_source
 
   def initialize(entry_fetcher = Post.public_method(:all))
@@ -29,6 +42,10 @@ class Blog
 
   def add_entry(entry)
     entry.save
+  end
+
+  def filter_by_tag(tag)
+    FilteredBlog.new(self, tag)
   end
 
   private
